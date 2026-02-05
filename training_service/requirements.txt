@@ -1,0 +1,29 @@
+# Data Ingestion Layer Dependencies
+
+# Core dependencies
+boto3>=1.28.0
+botocore>=1.31.0
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+pillow>=10.0.0
+
+# Audio processing (optional, for audio modality)
+# librosa>=0.10.0
+# soundfile>=0.12.0
+
+# Video processing (optional, for video modality)
+# opencv-python>=4.8.0
+# moviepy>=1.0.3
+
+# Configuration
+pyyaml>=6.0
+
+# Utilities
+tqdm>=4.65.0
+python-dotenv>=1.0.0
+
+# Testing (optional)
+# pytest>=7.4.0
+# pytest-cov>=4.1.0
