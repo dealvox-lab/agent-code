@@ -1,0 +1,30 @@
+# Preprocessing Layer Dependencies
+
+# Core dependencies (required)
+numpy>=1.24.0
+pillow>=10.0.0
+
+# Text processing (required)
+# No additional dependencies for basic text processing
+
+# Image processing (required)
+# Pillow is already included above
+
+# Audio processing (optional - for audio modality)
+librosa>=0.10.0
+soundfile>=0.12.0
+# numba>=0.56.0  # Required by librosa
+
+# Video processing (optional - for video modality)
+opencv-python>=4.8.0
+# or opencv-python-headless>=4.8.0 for server environments
+
+# Utilities
+tqdm>=4.65.0
+pyyaml>=6.0
+
+# Optional: Advanced features
+# scipy>=1.10.0  # For advanced signal processing
+# scikit-image>=0.20.0  # For advanced image processing
+# torch>=2.0.0  # For PyTorch tensor output format
+# torchvision>=0.15.0  # For torchvision transforms
