@@ -1,0 +1,171 @@
+# Preprocessing Configuration for Multi-Modal LLM Training
+
+# Text Preprocessing
+text:
+  enabled: true
+  
+  # Cleaning
+  lowercase: true
+  remove_urls: true
+  remove_emails: true
+  remove_phone_numbers: true
+  remove_numbers: false
+  remove_punctuation: false
+  remove_extra_whitespace: true
+  
+  # Normalization
+  unicode_normalization: 'NFKC'  # NFKC, NFC, NFD, NFKD
+  remove_accents: false
+  
+  # Tokenization
+  tokenize: true
+  tokenizer_type: 'whitespace'  # whitespace, word, sentence
+  max_length: 512
+  min_length: 1
+  
+  # Special tokens
+  add_special_tokens: true
+  bos_token: '<BOS>'
+  eos_token: '<EOS>'
+  pad_token: '<PAD>'
+  unk_token: '<UNK>'
+
+# Image Preprocessing
+image:
+  enabled: true
+  
+  # Resize
+  resize: true
+  target_size: [224, 224]  # [width, height]
+  resize_mode: 'bicubic'  # nearest, bilinear, bicubic, lanczos
+  maintain_aspect_ratio: false
+  
+  # Normalization (ImageNet defaults)
+  normalize_pixels: true
+  pixel_range: '0-1'  # '0-1' or '-1-1'
+  mean: [0.485, 0.456, 0.406]  # RGB
+  std: [0.229, 0.224, 0.225]   # RGB
+  
+  # Color
+  convert_to_rgb: true
+  grayscale: false
+  
+  # Augmentation (for training)
+  augment: false
+  horizontal_flip: true
+  vertical_flip: false
+  rotation_range: 15  # degrees
+  brightness_range: [0.8, 1.2]
+  contrast_range: [0.8, 1.2]
+  
+  # Output
+  output_format: 'numpy'  # numpy, pil, tensor
+  dtype: 'float32'
+
+# Audio Preprocessing
+audio:
+  enabled: false  # Set to true if using audio data
+  
+  # Loading
+  sample_rate: 16000  # Hz
+  mono: true
+  
+  # Duration
+  duration: null  # seconds, null for original duration
+  trim_silence: true
+  silence_threshold: 0.01
+  
+  # Normalization
+  normalize_amplitude: true
+  normalization_type: 'peak'  # peak or rms
+  target_level: 1.0
+  
+  # Feature extraction
+  extract_features: true
+  feature_type: 'mel_spectrogram'  # spectrogram, mel_spectrogram, mfcc, raw
+  
+  # Spectrogram
+  n_fft: 2048
+  hop_length: 512
+  win_length: null  # defaults to n_fft
+  window: 'hann'
+  
+  # Mel-spectrogram
+  n_mels: 128
+  fmin: 0.0
+  fmax: null  # defaults to sample_rate/2
+  
+  # MFCC
+  n_mfcc: 40
+  dct_type: 2
+  
+  # Augmentation
+  augment: false
+  time_stretch_range: [0.8, 1.2]
+  pitch_shift_range: [-2, 2]  # semitones
+  add_noise: false
+  noise_factor: 0.005
+  
+  # Output
+  output_format: 'numpy'
+  dtype: 'float32'
+
+# Video Preprocessing
+video:
+  enabled: false  # Set to true if using video data
+  
+  # Frame extraction
+  fps: null  # null to use original FPS
+  max_frames: 16
+  frame_sampling: 'uniform'  # uniform, random, all
+  
+  # Frame processing
+  resize_frames: true
+  target_size: [224, 224]  # [width, height]
+  maintain_aspect_ratio: false
+  
+  # Color
+  convert_to_rgb: true
+  grayscale: false
+  
+  # Normalization
+  normalize_pixels: true
+  pixel_range: '0-1'
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+  
+  # Temporal
+  temporal_sampling: 'all'  # all, keyframes, uniform
+  clip_duration: null  # seconds
+  
+  # Output
+  output_format: 'tensor'  # numpy, tensor, frames_list
+  stack_frames: true
+  dtype: 'float32'
+
+# Pipeline Options
+pipeline:
+  parallel_processing: false
+  num_workers: 4
+  error_handling: 'log'  # skip, raise, log
+  save_intermediate: false
+  cache_processed: false
+  verbose: false
+
+# Quality Control
+quality:
+  # Text
+  min_text_chars: 10
+  max_text_chars: 10000
+  
+  # Image
+  min_image_size: [32, 32]
+  max_image_size: [4096, 4096]
+  
+  # Audio
+  min_audio_duration: 0.1  # seconds
+  max_audio_duration: 30.0
+  
+  # Video
+  min_video_frames: 1
+  max_video_duration: 60.0  # seconds
